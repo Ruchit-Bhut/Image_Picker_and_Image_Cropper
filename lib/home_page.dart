@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_pick_crop/second_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,7 +19,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Select & Crop Image'),
+        title: const Text(
+          'Select & Crop Image',
+        ),
+        centerTitle: true,
+        elevation: 0,
       ),
       body: Center(
         child: Column(
@@ -30,7 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ? Container(
                     height: 150,
                     width: 150,
-                    decoration: const BoxDecoration(color: Colors.amber),
+                    decoration:  BoxDecoration(
+                      color: Colors.brown,
+                      borderRadius: BorderRadius.circular(40),
+                    ),
                   )
                 : ClipRRect(
                     borderRadius: BorderRadius.circular(100.0),
@@ -39,9 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 300.0,
                       width: 300.0,
                       fit: BoxFit.fill,
-                    )),
+                    ),
+                  ),
             const SizedBox(
-              height: 20.0,
+              height: 50.0,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -56,14 +65,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         children: [
                           Icon(
-                            Icons.image,
+                            Icons.image_outlined,
                             size: 60.0,
                           ),
                           SizedBox(height: 12.0),
                           Text(
                             "Gallery",
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
                           )
                         ],
                       ),
@@ -80,21 +92,52 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         children: [
                           Icon(
-                            Icons.camera_alt,
+                            Icons.camera_alt_outlined,
                             size: 60.0,
                           ),
-                          SizedBox(height: 12.0),
+                          SizedBox(
+                            height: 12.0,
+                          ),
                           Text(
                             "Camera",
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
                           )
                         ],
                       ),
                     ),
                   ),
-                )
+                ),
               ],
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.teal,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                textStyle: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => SecondPage(
+                      file: imageFile!,
+                    ),
+                  ),
+                );
+              },
+              child: const Text('Submit'),
             ),
           ],
         ),
